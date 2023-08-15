@@ -1,6 +1,6 @@
 import { conexion } from "../db/atlas.js";
 import { Router } from "express";
-import { ObjectId } from "mongodb";
+
 
 const appBodegas = Router();
 
