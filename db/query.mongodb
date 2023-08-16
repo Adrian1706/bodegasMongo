@@ -1,0 +1,331 @@
+use("db_campus_bodegas");
+
+use("db_campus_bodegas");
+db.createCollection("users", {
+    capped: true,
+    size: 6500,
+    max: 15000,
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            additionalProperties: false,
+            required: ['id', 'nombre', 'email', 'estado', 'password'],
+            properties: {
+                _id: {
+                    bsonType: 'objectId'
+                },
+                id: {
+                    bsonType: "int",
+                    description: 'La id es obligatoria y debe ser numérica'
+                },
+                nombre: {
+                    bsonType: 'string',
+                    description: 'El nombre_usuario es obligatorio',
+                },
+                email: {
+                    bsonType: 'string',
+                    description: 'El email es obligatorio',
+                },
+                estado: {
+                    bsonType: 'int',
+                    description: 'El estado es obligatorio'
+                },
+                created_by: {
+                    bsonType: 'int',
+                    description: 'El created_by es obligatorio'
+                },
+                update_by: {
+                    bsonType: 'int',
+                    description: 'El update_by es obligatorio'
+                },
+                password: {
+                    bsonType: 'string',
+                    description: 'El password es obligatorio'
+                },
+                created_at: {
+                    bsonType: 'date',
+                    description: 'El created_at no es obligatorio ni opcional pero el dato debe ser en formato fecha'
+                },
+                updated_at: {
+                    bsonType: 'date',
+                    description: 'El updated_at no es obligatorio ni opcional pero el dato debe ser en formato fecha'
+                },
+                deleted_at: {
+                    bsonType: 'date',
+                    description: 'El deleted_at no es obligatorio ni opcional pero el dato debe ser en formato fecha'
+                }
+            }
+        }
+    }
+});
+
+use("db_campus_bodegas");
+db.createCollection("bodegas", {
+    capped: true,
+    size: 6500,
+    max: 1000,
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            additionalProperties: false,
+            required: ['id', 'nombre', 'id_responsable', 'estado'],
+            properties: {
+                _id: {
+                    bsonType: 'objectId'
+                },
+                id: {
+                    bsonType: "int",
+                    description: 'La id es obligatoria y debe ser numérica'
+                },
+                nombre: {
+                    bsonType: 'string',
+                    description: 'El nombre es obligatorio',
+                },
+                id_responsable: {
+                    bsonType: 'int',
+                    description: 'El id_responsable es obligatorio'
+                },
+                estado: {
+                    bsonType: 'int',
+                    description: 'El estado es obligatorio'
+                },
+                created_by: {
+                    bsonType: 'int',
+                    description: 'El created_by es obligatorio'
+                },
+                update_by: {
+                    bsonType: 'int',
+                    description: 'El update_by es obligatorio'
+                },
+                created_at: {
+                    bsonType: 'date',
+                    description: 'El created_at no es obligatorio ni opcional pero el dato debe ser en formato fecha'
+                },
+                updated_at: {
+                    bsonType: 'date',
+                    description: 'El updated_at no es obligatorio ni opcional pero el dato debe ser en formato fecha'
+                },
+                deleted_at: {
+                    bsonType: 'date',
+                    description: 'El deleted_at no es obligatorio ni opcional pero el dato debe ser en formato fecha'
+                }
+            }
+        }
+    }
+});
+
+use("db_campus_bodegas");
+db.createCollection("productos", {
+    capped: true,
+    size: 6500,
+    max: 10000,
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            additionalProperties: false,
+            required: ['id', 'nombre', 'estado', 'created_by'],
+            properties: {
+                _id: {
+                    bsonType: 'objectId'
+                },
+                id: {
+                    bsonType: "int",
+                    description: 'La id es obligatoria y debe ser numérica'
+                },
+                nombre: {
+                    bsonType: 'string',
+                    description: 'El nombre es obligatorio'
+                },
+                descripcion: {
+                    bsonType: 'string',
+                    description: 'La descripción es obligatoria'
+                },
+                estado: {
+                    bsonType: 'int',
+                    description: 'El estado es obligatorio'
+                },
+                created_by: {
+                    bsonType: 'int',
+                    description: 'El created_by es obligatorio'
+                }
+            },
+            allOf: [
+                {
+                    properties: {
+                        update_by: {
+                            bsonType: 'int',
+                            description: 'El update_by es obligatorio'
+                        },
+                        created_at: {
+                            bsonType: 'date',
+                            description: 'El created_at no es obligatorio ni opcional pero se acepta el dato'
+                        },
+                        updated_at: {
+                            bsonType: 'date',
+                            description: 'El updated_at no es obligatorio ni opcional pero se acepta el dato'
+                        },
+                        deleted_at: {
+                            bsonType: 'date',
+                            description: 'El deleted_at no es obligatorio ni opcional pero se acepta el dato'
+                        }
+                    }
+                }
+            ]
+        }
+    }
+});
+
+use("db_campus_bodegas");
+db.createCollection("inventarios", {
+    capped: true,
+    size: 6500,
+    max: 20000,
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            additionalProperties: false,
+            required: ['id', 'id_bodega', 'id_producto', 'cantidad'],
+            properties: {
+                _id: {
+                    bsonType: 'objectId'
+                },
+                id: {
+                    bsonType: 'int',
+                    description: 'La id es obligatoria y debe ser numérica'
+                },
+                id_bodega: {
+                    bsonType: 'int',
+                    description: 'El id_bodega es obligatorio'
+                },
+                id_producto: {
+                    bsonType: 'int',
+                    description: 'El id_producto es obligatorio'
+                },
+                cantidad: {
+                    bsonType: 'int',
+                    description: 'La cantidad es obligatoria'
+                },
+                created_by: {
+                    bsonType: 'int',
+                    description: 'El created_by es obligatorio',
+                },
+                update_by: {
+                    bsonType: 'int',
+                    description: 'El update_by es obligatorio'
+                },
+                created_at: {
+                    bsonType: 'string',
+                    description: 'El created_at no es obligatorio ni opcional pero se acepta el dato',
+                },
+                updated_at: {
+                    bsonType: 'string',
+                    description: 'El updated_at no es obligatorio ni opcional pero se acepta el dato',
+                },
+                deleted_at: {
+                    bsonType: 'string',
+                    description: 'El deleted_at no es obligatorio ni opcional pero se acepta el dato',
+                }
+            }
+        }
+    }
+});
+
+use("db_campus_bodegas");
+db.createCollection("historiales", {
+    capped: true,
+    size: 6500,
+    max: 50000,
+    validator: {
+        $jsonSchema: {
+            bsonType: 'object',
+            additionalProperties: false,
+            required: ['id', 'cantidad', 'id_bodega_origen', 'id_bodega_destino', 'id_inventario'],
+            properties: {
+                _id: {
+                    bsonType: 'objectId'
+                },
+                id: {
+                    bsonType: "int",
+                    description: 'La id es obligatoria y debe ser numérica'
+                },
+                cantidad: {
+                    bsonType: 'int',
+                    description: 'La cantidad es obligatoria'
+                },
+                id_bodega_origen: {
+                    bsonType: 'int',
+                    description: 'El id_bodega_origen es obligatorio'
+                },
+                id_bodega_destino: {
+                    bsonType: 'int',
+                    description: 'El id_bodega_destino es obligatorio'
+                },
+                id_inventario: {
+                    bsonType: 'int',
+                    description: 'El id_inventario es obligatorio'
+                },
+                created_by: {
+                    bsonType: 'int',
+                    description: 'El created_by es obligatorio'
+                },
+                update_by: {
+                    bsonType: 'int',
+                    description: 'El update_by es obligatorio'
+                },
+                created_at: {
+                    bsonType: 'string',
+                    description: 'El created_at no es obligatorio ni opcional pero se acepta el dato'
+                },
+                updated_at: {
+                    bsonType: 'string',
+                    description: 'El updated_at no es obligatorio ni opcional pero se acepta el dato'
+                },
+                deleted_at: {
+                    bsonType: 'string',
+                    description: 'El deleted_at no es obligatorio ni opcional pero se acepta el dato'
+                }
+            },
+        }
+    }
+});
+
+use("db_campus_bodegas");
+db.bodegas.find().sort({ nombre: 1 });
+
+use("db_campus_bodegas");
+db.productos.aggregate([
+    {
+        $lookup: {
+            from: 'inventarios',
+            localField: 'id',
+            foreignField: 'id_producto',
+            as: 'inventarios',
+        }
+    },
+    {
+        $unwind: '$inventarios',
+    },
+    {
+        $group: {
+            _id: '$_id',
+            id: { $first: '$id' },
+            nombre: { $first: '$nombre' },
+            estado: { $first: '$estado' },
+            created_by: { $first: '$created_by' },
+            total: { $sum: '$inventarios.cantidad' }
+        }
+    },
+    {
+        $sort: { total: -1 }
+    },
+    {
+        $project: {
+            _id: 0,
+            id: 1,
+            nombre: 1,
+            estado: 1,
+            created_by: 1,
+            total: 1,
+        }
+    }
+]);
