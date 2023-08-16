@@ -23,6 +23,18 @@ appBodegas.post("/", async(req, res)=>{
          console.log(error.errInfo.details.schemaRulesNotSatisfied[0]);
          res.send();
      }
+
+     /** Body del metodo post */
+
+     // {
+     //      "id": 10,
+     //      "nombre": "Diego's bodega",
+     //      "id_responsable": 16,
+     //      "estado": 1,
+     //      "created_by": 16,
+     //      "created_at": "2005-06-17"
+     // }
+
 });
 
 export default appBodegas;
