@@ -18,7 +18,7 @@ appProductos.get("/", async (req, res) => {
             }
         },
         {
-            $unwind: '$inventarios',
+            $unwind: { path: '$inventarios', preserveNullAndEmptyArrays: true }
         },
         {
             $group: {
