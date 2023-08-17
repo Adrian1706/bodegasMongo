@@ -44,7 +44,31 @@ appProductos.get("/", async (req, res) => {
             }
         }
     ]).toArray();
-    res.send(result);
+    res.send(result);   
+});
+
+appProductos.post("/", async (req,res)=>{
+    let data = req.body;
+    let idR = Math.floor(Math.random() * (500 - 50 + 1)) + 50;
+    let inventarios = db.collection("inventarios");
+    try {
+        let insert = await Productos.insertOne(data);
+        let inserIn = await inventarios.insertOne({
+            id:idR,
+            id_bodega:1,        
+            id_producto:data.id,
+            cantidad:1,
+            created_by:166
+        })
+        if (insert.insertedId === undefined || inserIn.insertedId === undefined) {
+            res.send({status:400, message: "Error al insertar la data"});
+        }else{
+            res.send({status:200, message: "La data se inserto correctamente"});
+        }
+        console.log(insert.insertedId === inserIn.insertedId);
+    } catch (error) {
+        res.status(400).send({error: error});
+    }
 });
 
 export default appProductos;
