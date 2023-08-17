@@ -1,5 +1,6 @@
 import { conexion } from "../db/atlas.js";
 import { Router } from "express";
+import { limitGrt } from "../limit/config.js";
 
 const appProductos = Router();
 
@@ -7,7 +8,9 @@ let db = await conexion();
 
 let Productos = db.collection('productos');
 
-appProductos.get("/", async (req, res) => {
+appProductos.get("/", limitGrt(), async (req, res) => {
+    if(!req.rateLimit) return; 
+    console.log(req.rateLimit);
     let result = await Productos.aggregate([
         {
             $lookup: {
@@ -47,7 +50,9 @@ appProductos.get("/", async (req, res) => {
     res.send(result);   
 });
 
-appProductos.post("/", async (req,res)=>{
+appProductos.post("/", limitGrt(), async (req,res)=>{
+    if(!req.rateLimit) return; 
+    console.log(req.rateLimit);
     let data = req.body;
     let idR = Math.floor(Math.random() * (500 - 50 + 1)) + 50;
     let inventarios = db.collection("inventarios");
