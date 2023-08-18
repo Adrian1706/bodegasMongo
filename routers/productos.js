@@ -1,6 +1,7 @@
 import { conexion } from "../db/atlas.js";
 import { Router } from "express";
 import { limitGrt } from "../limit/config.js";
+import { proxyVerify, DTO } from "../middleware/proxyproductos.js";
 
 
 const appProductos = Router();
@@ -9,7 +10,7 @@ let db = await conexion();
 
 let Productos = db.collection('productos');
 
-appProductos.get("/", limitGrt(), async (req, res) => {
+appProductos.get("/", limitGrt(), proxyVerify, async (req, res) => {
     if(!req.rateLimit) return; 
     console.log(req.rateLimit);
     let result = await Productos.aggregate([
@@ -51,7 +52,7 @@ appProductos.get("/", limitGrt(), async (req, res) => {
     res.send(result);   
 });
 
-appProductos.post("/", limitGrt(), async (req,res)=>{
+appProductos.post("/", limitGrt(), proxyVerify, DTO, async (req,res)=>{
     if(!req.rateLimit) return; 
     console.log(req.rateLimit);
     let data = req.body;

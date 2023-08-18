@@ -18,7 +18,7 @@ appBodegas.get("/", limitGrt(), proxyVerify, async(req, res)=>{
     res.send(result);
 });
 
-appBodegas.post("/", limitGrt(), DTO, async(req, res)=>{
+appBodegas.post("/", limitGrt(), proxyVerify, DTO, async(req, res)=>{
     if(!req.rateLimit) return; 
     console.log(req.rateLimit);
     let result;
