@@ -2,23 +2,23 @@ import 'reflect-metadata';
 import { Router } from "express";
 import {validate} from 'class-validator';
 import {plainToClass, classToPlain} from 'class-transformer';
-import { Inventario } from "../storage/inventarios.js"
+import { productos } from "../storage/productos.js"
 
-const proxyInventario = Router();
+const proxyProductos = Router();
 const Dto = Router();
 
-proxyInventario.use((req,res,next)=>{
+proxyProductos.use((req,res,next)=>{
     if(!req.rateLimit) return;
     let {payload}= req.data;
     const { iat,exp, ...newPayload} =payload;
     payload =newPayload;
-    let Clone = JSON.stringify(classToPlain(plainToClass(Inventario, {}, { ignoreDecorators: true })));
+    let Clone = JSON.stringify(classToPlain(plainToClass(productos, {}, { ignoreDecorators: true })));
     (!Verify) ? res.status(406).send({status:406, message:"No tienes autorización"}) : next();
 });
 
 Dto.use( async(req,res,next) => {
     try {
-        let data = plainToClass(Inventario, req.body);
+        let data = plainToClass(productos, req.body);
         await validate(data);
         req.body = JSON.parse(JSON.stringify(data));
         req.data = undefined;

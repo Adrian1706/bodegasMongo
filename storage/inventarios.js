@@ -10,30 +10,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Expose } from 'class-transformer';
 import { IsDefined } from 'class-validator';
 export class Inventario {
-    constructor(p1, p2, p3, p4) {
-        this.id = p1;
-        this.id_bodega = p2;
-        this.id_producto = p3;
-        this.cantidad = p4;
+    constructor(data) {
+        Object.assign(this, data);
+        this.id = 0;
+        this.id_bodega = 0;
+        this.id_producto = 0;
+        this.cantidad = 0;
     }
 }
 __decorate([
     Expose({ name: 'id' }),
-    IsDefined({ message: () => { throw { status: 422, message: `La id es obligatoria` }; } }),
+    IsDefined({ message: () => { throw { status: 422, message: `El parámetro id es obligatoria` }; } }),
     __metadata("design:type", Number)
 ], Inventario.prototype, "id", void 0);
 __decorate([
     Expose({ name: 'id_bodega' }),
-    IsDefined({ message: () => { throw { status: 422, message: `el id de bodega es obligatoria` }; } }),
+    IsDefined({ message: () => { throw { status: 422, message: `El parámetro id de bodega es obligatoria` }; } }),
     __metadata("design:type", Number)
 ], Inventario.prototype, "id_bodega", void 0);
 __decorate([
     Expose({ name: 'id_producto' }),
-    IsDefined({ message: () => { throw { status: 422, message: `el id de producto es obligatoria` }; } }),
+    IsDefined({ message: () => { throw { status: 422, message: `El parámetro id de producto es obligatoria` }; } }),
     __metadata("design:type", Number)
 ], Inventario.prototype, "id_producto", void 0);
 __decorate([
     Expose({ name: 'cantidad' }),
-    IsDefined({ message: () => { throw { status: 422, message: `La  cantidad es obligatoria` }; } }),
+    IsDefined({ message: () => { throw { status: 422, message: `El parámetro cantidad es obligatoria` }; } }),
     __metadata("design:type", Number)
 ], Inventario.prototype, "cantidad", void 0);

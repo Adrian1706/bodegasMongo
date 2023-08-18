@@ -9,45 +9,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Expose } from 'class-transformer';
 import { IsDefined } from 'class-validator';
-export class Bodegas {
+export class productos {
     constructor(data) {
         Object.assign(this, data);
         this.id = 0;
         this.nombre = "nombre bodega";
-        this.id_responsable = 0;
+        this.descripcion = "descripción";
         this.estado = 0;
         this.created_by = 0;
-        this.created_by = 0;
-        this.created_at = "fecha";
     }
 }
 __decorate([
     Expose({ name: 'id' }),
     IsDefined({ message: () => { throw { status: 422, message: `El id es obligatorio` }; } }),
     __metadata("design:type", Number)
-], Bodegas.prototype, "id", void 0);
+], productos.prototype, "id", void 0);
 __decorate([
     Expose({ name: 'nombre' }),
     IsDefined({ message: () => { throw { status: 422, message: `El nombre es obligatorio` }; } }),
     __metadata("design:type", String)
-], Bodegas.prototype, "nombre", void 0);
+], productos.prototype, "nombre", void 0);
 __decorate([
-    Expose({ name: 'id_responsable' }),
-    IsDefined({ message: () => { throw { status: 422, message: `El id_responsable es obligatorio` }; } }),
-    __metadata("design:type", Number)
-], Bodegas.prototype, "id_responsable", void 0);
+    Expose({ name: 'descripcion' }),
+    IsDefined({ message: () => { throw { status: 422, message: `El descripcion es obligatorio` }; } }),
+    __metadata("design:type", String)
+], productos.prototype, "descripcion", void 0);
 __decorate([
     Expose({ name: 'estado' }),
     IsDefined({ message: () => { throw { status: 422, message: `El estado es obligatorio` }; } }),
     __metadata("design:type", Number)
-], Bodegas.prototype, "estado", void 0);
+], productos.prototype, "estado", void 0);
 __decorate([
     Expose({ name: 'created_by' }),
     IsDefined({ message: () => { throw { status: 422, message: `El created_by es obligatorio` }; } }),
     __metadata("design:type", Number)
-], Bodegas.prototype, "created_by", void 0);
-__decorate([
-    Expose({ name: 'created_at' }),
-    IsDefined({ message: () => { throw { status: 422, message: `El created_at es obligatorio` }; } }),
-    __metadata("design:type", String)
-], Bodegas.prototype, "created_at", void 0);
+], productos.prototype, "created_by", void 0);

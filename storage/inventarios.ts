@@ -18,12 +18,11 @@ export class Inventario{
     @IsDefined ({ message: () => { throw { status: 422, message: `El parámetro cantidad es obligatoria` }}})
     cantidad : number;
 
-    constructor ( p1:number, p2:number, p3:number, p4:number ) {
-        
-        this.id= p1;
-        this.id_bodega=p2;
-        this.id_producto=p3;
-        this.cantidad=p4;
-            
+    constructor (data:Partial<Inventario>){
+        Object.assign(this, data);
+        this.id = 0;
+        this.id_bodega = 0;
+        this.id_producto = 0;
+        this.cantidad = 0;
     }
 }
