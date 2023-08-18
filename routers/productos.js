@@ -2,6 +2,7 @@ import { conexion } from "../db/atlas.js";
 import { Router } from "express";
 import { limitGrt } from "../limit/config.js";
 
+
 const appProductos = Router();
 
 let db = await conexion();

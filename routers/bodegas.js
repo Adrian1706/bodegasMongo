@@ -1,6 +1,7 @@
 import { conexion } from "../db/atlas.js";
 import { Router } from "express";
 import { limitGrt } from "../limit/config.js";
+import { proxyVerify, DTO } from "../middleware/proxybodegas.js";
 
 const appBodegas = Router();
 
@@ -8,7 +9,7 @@ let db = await conexion();
 
 let Bodegas = db.collection('bodegas');
 
-appBodegas.get("/", limitGrt(), async(req, res)=>{
+appBodegas.get("/", limitGrt(), proxyVerify, async(req, res)=>{
     if(!req.rateLimit) return; 
     console.log(req.rateLimit);
     let db = await conexion();
@@ -17,7 +18,7 @@ appBodegas.get("/", limitGrt(), async(req, res)=>{
     res.send(result);
 });
 
-appBodegas.post("/", limitGrt(), async(req, res)=>{
+appBodegas.post("/", limitGrt(), DTO, async(req, res)=>{
     if(!req.rateLimit) return; 
     console.log(req.rateLimit);
     let result;

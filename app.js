@@ -2,14 +2,16 @@ import dotenv from 'dotenv';
 import express from 'express';
 import appBodegas from './routers/bodegas.js';
 import appProductos from './routers/productos.js';
+import { appToken, appVerify } from './limit/token.js';
 
 dotenv.config();
 
 let app = express();
 
 app.use(express.json());
-app.use("/bodegas", appBodegas);
-app.use("/productos", appProductos);
+app.use("/token", appToken)
+app.use("/bodegas", appVerify, appBodegas);
+app.use("/productos", appVerify, appProductos);
 
 let config = JSON.parse(process.env.MY_SERVER);
 

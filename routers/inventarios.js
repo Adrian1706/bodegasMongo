@@ -1,6 +1,7 @@
 import { conexion } from "../db/atlas.js";
 import { Router } from "express";
 import { limitGrt } from "../limit/config.js";
+import { DTO } from "../middleware/proxybodegas.js";
 
 const appInventarios = Router();
 
@@ -8,7 +9,7 @@ let db = await conexion();
 
 let Inventarios = db.collection('inventarios');
 
-appInventarios.post("/", limitGrt(), async (req, res) => {
+appInventarios.post("/", limitGrt(), DTO, async (req, res) => {
     let data = req.body;
     let idR = Math.floor(Math.random() * (500 - 50 + 1)) + 50;
     try {
